@@ -9,6 +9,11 @@
 
 module.exports = function (grunt) {
 
+    var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
+    var mountFolder = function (connect, dir) {
+        return connect.static(require('path').resolve(dir));
+    };
+
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
@@ -108,11 +113,20 @@ module.exports = function (grunt) {
             },
             livereload: {
                 options: {
+                    // open: true,
+                    // base: [
+                    //     '.tmp',
+                    //     '<%= yeoman.app %>'
+                    // ]
                     open: true,
-                    base: [
-                        '.tmp',
-                        '<%= yeoman.app %>'
-                    ]
+                    middleware: function (connect) {
+                        return [
+                            lrSnippet,
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'app'),
+                            require('./api')
+                        ];
+                    }
                 }
             },
             test: {
