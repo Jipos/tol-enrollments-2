@@ -32,14 +32,14 @@ define [
     getRegistry: ->
       registry
 
-  msgBus.commands.setHandler 'register:instance', (instance, id) ->
+  msgBus.setCommandHandler 'register:instance', (instance, id) ->
     API.register instance, id # if App.environment is 'development'
 
-  msgBus.commands.setHandler 'unregister:instance', (instance, id) ->
+  msgBus.setCommandHandler 'unregister:instance', (instance, id) ->
     API.unregister instance, id # if App.environment is 'development'
 
-  msgBus.reqres.setHandler 'reset:registry', ->
+  msgBus.setRequestHandler 'reset:registry', ->
     API.resetRegistry()
 
-  msgBus.reqres.setHandler 'get:registry', ->
+  msgBus.setRequestHandler 'get:registry', ->
     API.getRegistry()

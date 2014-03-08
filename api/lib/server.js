@@ -9,11 +9,12 @@ app.get('/users', userRoutes.getAll);
 app.get('/users/:id', userRoutes.getOne);
 
 // LearningUnit routes
-app.get('learningunits', learningUnitRoutes.getAll);
-app.get('learningunits/:id', learningUnitRoutes.getOne);
+app.get('/learningunits', learningUnitRoutes.getAll);
+app.get('/learningunits/:id', learningUnitRoutes.getOne);
 
 // Enrollment routes
-app.get('/enrollments', enrollmentRoutes.getEnrollments);
+app.get('/enrollments', enrollmentRoutes.getMany);
+app.get('/enrollment/:id', enrollmentRoutes.getOne);
 
 
 module.exports = app

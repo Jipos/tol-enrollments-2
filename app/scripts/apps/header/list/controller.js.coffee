@@ -12,9 +12,14 @@ define [
 
     initialize: ->
       navs = msgBus.request 'nav:entities'
-      listView = @getListView navs
-      @show listView
+      header = @getHeaderView navs
+      @show header
 
-    getListView: (navs) ->
-      new views.Header
+    getHeaderView: (navs) ->
+      header = new views.Header
         collection: navs
+
+      @listenTo header, 'change:selected', (event) ->
+        msgBus.trigger event
+
+      header

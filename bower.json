@@ -2,7 +2,7 @@
   "name": "tol-enrollments-2",
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.0.3",
+    "bootstrap": "~3.1.1",
     "jquery": "~1.10.2",
     "backbone.marionette": "~1.6.2",
     "requirejs": "~2.1.11",

@@ -6,7 +6,7 @@ define [
   'msgbus'
 ], ($, _, Backbone, Marionette, msgBus) ->
 
-  root: 'listEnrollments'
+  default: 'listEnrollments'
   
   listEnrollments:    '#listEnrollments'
   addEnrollments:     '#addEnrollments'

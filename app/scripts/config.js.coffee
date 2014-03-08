@@ -24,14 +24,14 @@ requirejs.config
     marionette: '../bower_components/backbone.marionette/lib/core/amd/backbone.marionette'
 
     # alias the bootstrap js lib
-    bootstrap: 'vendor/bootstrap'
+    bootstrap: '../bower_components/bootstrap/dist/js/bootstrap'
 
     # handlebars from the require handlerbars plugin below
-    handlebars: '../bower_components/require-handlebars-plugin/Handlebars'
+    handlebars: '../bower_components/require-handlebars-plugin/hbs/handlebars'
 
     # require handlebars plugin - Alex Sexton
-    i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile'
-    json2: '../bower_components/require-handlebars-plugin/hbs/json2'
+    #i18nprecompile: '../bower_components/require-handlebars-plugin/hbs/i18nprecompile'
+    #json2: '../bower_components/require-handlebars-plugin/hbs/json2'
     hbs: '../bower_components/require-handlebars-plugin/hbs'
 
     # i18next
@@ -45,19 +45,22 @@ requirejs.config
 
   hbs:
     disableI18n: true
+    helperPathCallback: (name) ->
+      "lib/handlebars/helpers/#{name}"
 
   deps: [
-    #'jquery.spin'
-    #'backbone-routefilter'
-    #'backbone-mutators'
-    #'coctail'
-    # 'config/load'
-    # 'backbone/load'
-    # 'backbone/lib/load'
-    # 'backbone/entities/load'
-    # 'backbone/apps/load'
+    'bootstrap'
+
+    'lib/backbone/sync'
+    
     'lib/utilities/registry'
+    'lib/utilities/fetch'
+    
     'entities/abstract/navs'
+    'entities/user_enrollments'
+    
     'apps/header/header_app'
+    'apps/enrollments/enrollments_app'
+    
     'app'
   ]

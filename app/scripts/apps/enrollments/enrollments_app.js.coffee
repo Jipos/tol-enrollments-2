@@ -4,13 +4,12 @@ define [
   'backbone'
   'marionette'
   'msgbus'
-  'apps/header/list/controller'
+  'apps/enrollments/list/controller'
 ], ($, _, Backbone, Marionette, msgBus, Controller) ->
 
   API =
     list: ->
       new Controller
-        region: msgBus.request 'header:region'
 
-  msgBus.setCommandHandler 'start:header:app', ->
+  msgBus.setCommandHandler 'start:enrollments:app', ->
     API.list()
