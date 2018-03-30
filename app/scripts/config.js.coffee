@@ -11,7 +11,10 @@ requirejs.config
       deps: ['underscore', 'jquery']
       exports: 'Backbone'
     bootstrap:
-      deps: ['jquery']
+      deps: ['jquery'],
+    'backbone.projections':
+      deps: ['underscore', 'backbone']
+      exports: 'BackboneProjections'
 
   paths:
     jquery: '../bower_components/jquery/jquery'
@@ -25,6 +28,8 @@ requirejs.config
 
     # alias the bootstrap js lib
     bootstrap: '../bower_components/bootstrap/dist/js/bootstrap'
+
+    'backbone.projections': '../bower_components/backbone.projections/backbone.projections'
 
     # handlebars from the require handlerbars plugin below
     handlebars: '../bower_components/require-handlebars-plugin/hbs/handlebars'

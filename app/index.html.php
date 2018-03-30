@@ -23,12 +23,12 @@
     <body>
 
         <div id="header-region" class="text-center"></div>
-        
+
         <div id="main-region" class="main"></div>
 
         <!-- build:js scripts/main.min.js -->
         <script data-main="scripts/config" src="bower_components/requirejs/require.js"></script>
         <!-- /build -->
-        
+
     </body>
 </html>

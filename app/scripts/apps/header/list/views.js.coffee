@@ -37,12 +37,12 @@ define [
       collection: model.get 'navs'
 
     events:
-      'change': 'changeSelection'
+      'change': 'triggerEvent'
 
     ui:
       navs: 'select'
 
-    changeSelection: ->
+    triggerEvent: ->
       @trigger 'change:selected', @ui.navs.val()
 
   Header: Header
