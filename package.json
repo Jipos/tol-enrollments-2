@@ -1,0 +1,47 @@
+{
+  "name": "tol-enrollments-2",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "dev": "webpack --config webpack-dev.config.js --display-modules",
+    "prod": "webpack --config webpack-prod.config.js",
+    "devserver": "webpack-dev-server --config webpack-watch.config.js",
+    "watch": "webpack --config webpack-dev.config.js --watch",
+    "serve": "webpack-dev-server --config webpack-development.config.js --hot",
+    "server": "server",
+    "backend": "nodemon mockBackendServer.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jipos/tol-enrollments-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jipos/tol-enrollments-2/issues"
+  },
+  "homepage": "https://github.com/Jipos/tol-enrollments-2#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "express": "^4.16.3",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.1.0",
+    "html-webpack-template": "^6.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "nodemon": "^1.17.3",
+    "optimize-css-assets-webpack-plugin": "^4.0.0",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-middleware": "^3.1.0",
+    "webpack-dev-server": "^3.1.1",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5"
+  }
+}
