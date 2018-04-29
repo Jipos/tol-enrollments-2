@@ -17,15 +17,13 @@ module.exports = {
       inject: false,
       template: require('html-webpack-template'),
       appMountId: 'app',
-      appMountHtmlSnippet: '<div class="app-spinner"><i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true">Loading</i></div>',
-      headHtmlSnippet: '<style>div.app-spinner {position: fixed;top:50%;left:50%;}</style >',
-      bodyHtmlSnippet: '<custom-element></custom-element>',
-      title: 'Output Management',
+      appMountHtmlSnippet: '  <header></header>\n      <main></main>',
+      title: 'Toledo admin tools',
       // Additional settings for the index.html, using html-webpack-template plugin
       meta: [
         {
           name: 'description',
-          content: 'A better default template for html-webpack-plugin.'
+          content: 'Admin tools for your Toledo enrollments.'
         }
       ]
     })

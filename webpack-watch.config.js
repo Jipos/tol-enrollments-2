@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack-dev.config.js');
+const path = require('path');
 
 module.exports = merge(common, {
   // Configure the dev server (which watches changes and provides live-reloading)
@@ -12,6 +13,12 @@ module.exports = merge(common, {
     inline: true,
     open: true
   },
+  resolve: {
+    alias: {
+      lib: path.resolve(__dirname, 'src/lib/'),
+      entities: path.resolve(__dirname, 'src/entities/')
+    }
+  }
   // optimization: {
   //   runtimeChunk: {
   //     name: 'manifest'

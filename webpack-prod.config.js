@@ -14,6 +14,12 @@ module.exports = {
   },
   // Enable source maps (outputted as an external file)
   devtool: 'source-map',
+  resolve: {
+    alias: {
+      lib: path.resolve(__dirname, 'src/lib/'),
+      entities: path.resolve(__dirname, 'src/entities/')
+    }
+  },
   // Optimize the output
   optimization: {
     splitChunks: {

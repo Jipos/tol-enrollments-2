@@ -12,11 +12,31 @@ module.exports = {
   },
   // Enable source maps (outputted as an external file, but evaluated each time for speed)
   devtool: 'eval-source-map',
+  resolve: {
+    alias: {
+      lib: path.resolve(__dirname, 'src/lib/'),
+      entities: path.resolve(__dirname, 'src/entities/')
+    }
+  },
   plugins: [
     // Clear the dist folder each build (to avoid issues with left over files)
     new CleanWebpackPlugin(['dist']),
     // Generate the index.html page
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      // Enable the html-webpack-template plugin, for generating a richer index.html
+      inject: false,
+      template: require('html-webpack-template'),
+      appMountId: 'app',
+      appMountHtmlSnippet: '  <header></header>\n      <main></main>',
+      title: 'Toledo admin tools',
+      // Additional settings for the index.html, using html-webpack-template plugin
+      meta: [
+        {
+          name: 'description',
+          content: 'Admin tools for your Toledo enrollments.'
+        }
+      ]
+    })
   ],
   module: {
     rules: [

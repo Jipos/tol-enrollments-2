@@ -1,30 +1,27 @@
-import './style.css';
+import $ from 'jquery';
+import Bb from 'backbone';
+import Mn from 'backbone.marionette';
 
-import one from './components/one';
-import two from './components/two';
+import Radio from 'backbone.radio';
 
-import printMe from './print.js';
+// Turn on debug mode (log unhandled requests)
+Radio.DEBUG = true;
 
-import join from 'lodash/join';
+// import utilities for side-effects (e.g. extending libraries)
+import 'lib/marionette.renderer';
+import 'lib/utilities/fetch';
 
-import _ from 'lodash';
+import 'lib/components/loading';
 
-function component() {
-  var element = document.createElement('div');
-  var btn = document.createElement('button');
+// Register entities (for side effects)
+import 'entities/enrollments';
 
-  element.innerHTML = join(['hello', 'webpacks'], ' '); //'Hello webpack';
-  element.classList.add('hello');
+import './components/enroll'; // Register enroll component
+import './components/list_enrollments'; // Register listEnrollments component
+//import Pages from './pages'
 
-  btn.innerHTML = _.join(['Click me and check the', 'console!'], ' ');
-  btn.onclick = () => printMe();
+window.Mn = Mn;
+window.Bb = Bb;
+window.jQuery = $;
 
-  element.appendChild(btn);
-
-  return element;
-}
-
-document.body.appendChild(component());
-
-document.body.appendChild(one());
-document.body.appendChild(two());
+Backbone.history.start();
