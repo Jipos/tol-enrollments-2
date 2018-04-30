@@ -1,13 +1,14 @@
 import Mn from 'backbone.marionette';
-import Spinner from 'spin.js';
+import {Spinner} from 'spin.js';
 
+window.Spinner = Spinner;
 export const LoadingView = Mn.View.extend({
   template: false,
   className: 'loading-container',
-  onShow: function () {
+  onRender: function () {
     var opts = this._getOptions();
     this.spinner = new Spinner(opts);
-    this.spinner.spin(this.$el);
+    this.spinner.spin(this.el);
     // Avoid showing the spinner if the fetching takes less than 100ms
     // setTimeout(() => this.spinner.spin(this.el), 100);
   },

@@ -1,16 +1,17 @@
-import {ApplicationController} from 'lib/application_controller';
+import ApplicationController from 'lib/application_controller';
 import {CollectionView} from './views';
 import Bb from 'backbone';
 import random from 'lodash/random';
 import times from 'lodash/times';
-import uniqueId from 'lodash/uniqueId'
+import uniqueId from 'lodash/uniqueId';
+
+import Mn from 'backbone.marionette';
 
 const ListEnrollmentsController = ApplicationController.extend({
 
   initialize: function() {
     const enrollments = this.getChannel().request('enrollment:entities');
     const listEnrollmentsView = this.getListEnrollmentsView(enrollments);
-    console.log('listEnrollmentsController', enrollments, listEnrollmentsView);
     this.show(listEnrollmentsView, {loading: true});
   },
 

@@ -1,13 +1,17 @@
 import Mn from 'backbone.marionette';
 
+const ItemView = Mn.View.extend({
+  template: function(data) {
+    return `<p>listEnrollments: ${data.id}</p>`;
+  },
+})
+
 export const CollectionView = Mn.NextCollectionView.extend({
+  childView: ItemView,
   initialize: function () {
     this.listenTo(this.model, 'change', this.render);
   },
-  template: function(data) {
-    return `<h2>listEnrollments: ${data.val}</h2>`;
-  },
   onRender: function () {
-    console.log(this.cid, this.model.get('val'));
+    console.log(this.cid, this.collection);
   }
 });

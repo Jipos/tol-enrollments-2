@@ -7,21 +7,15 @@ import pick from 'lodash/pick';
 import toArray from 'lodash/toArray';
 import compact from 'lodash/compact';
 
-import {ApplicationController} from 'lib/application_controller';
+import ApplicationController from 'lib/application_controller';
 import {LoadingView} from './views';
 
 // TODO: KR I'm not sure the opacity loadingType works correctly.
 // The cleanup of the realView for this type seems to be missing
-export const LoadingController = ApplicationController.extend({
+const LoadingController = ApplicationController.extend({
   initialize: function (options = {}) {
     // TODO: KR ensure the following options: view, region and config
     var { view, config } = options;
-
-    console.log(isBoolean(undefined));
-    console.log(isBoolean(true));
-    console.log(isBoolean(false));
-    console.log(isBoolean({}));
-    console.log(isBoolean(config));
 
     config = isBoolean(config) ? {} : config;
 
@@ -43,7 +37,7 @@ export const LoadingController = ApplicationController.extend({
     this.showRealView(view, loadingView, config);
   },
   showRealView: function (realView, loadingView, config) {
-   whenFetched(config.entities).done(function() {
+   this.getChannel().request('when:fetched', config.entities).done(() => {
      // ...after the entities are fetched, execute this callback
      // ================================================================ ##
      // If the region we are trying to insert is not the loadingView then
@@ -77,12 +71,14 @@ export const LoadingController = ApplicationController.extend({
   }
 });
 
-// TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
-// And get it from somewhere, instead of just 'knowing' it here.
-Radio.channel('toledo').reply('show:loading', function(view, options) {
-  return new LoadingController({
-    view: view,
-    region: options.region,
-    config: options.loading
-  })
-});
+export function initializeLoadingComponent (options = {}) {
+  // TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
+  // And get it from somewhere, instead of just 'knowing' it here.
+  Radio.channel(options.channelName).reply('show:loading', function(view, options) {
+    return new LoadingController({
+      view: view,
+      region: options.region,
+      config: options.loading
+    })
+  });
+};

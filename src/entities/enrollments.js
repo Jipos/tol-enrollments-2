@@ -8,8 +8,9 @@ import enrollments_me from 'entities/enrollments-me'
 
 mockjax({
   url: '/api/enrollments/me',
-  responseText: enrollments_me
-})
+  responseText: enrollments_me,
+  responseTime: 2000
+});
 
 const Enrollment = Model.extend({
 
@@ -29,9 +30,10 @@ const Enrollments = Collection.extend({
 const API = {
   // Cache loaded enrollments for 5 minutes (note that there's no way to alter this behaviour).
   // TODO: KR do we need a way to force a reload?
-  // TODO: KR how about loading enrollments for other users?
-  getEnrollments: memoize(function () {
-    var enrollments = new Enrollments({userId: 'me'});
+  // TODO: KR is there ever a need to create a new Collection? We might want to re-fetch it.
+  //       but the existing Collection should be fine.
+  getEnrollments: memoize(function (userId = 'me') {
+    var enrollments = new Enrollments({userId: userId});
     enrollments.fetch({reset: true});
     return enrollments;
   }, {timeout: 300000, hot: false})
@@ -39,4 +41,4 @@ const API = {
 
 // TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
 // And get it from somewhere, instead of just 'knowing' it here.
-Radio.channel('toledo').reply('enrollment:entities', () => API.getEnrollments());
+Radio.channel('foobar').reply('enrollment:entities', () => API.getEnrollments());

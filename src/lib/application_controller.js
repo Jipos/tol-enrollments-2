@@ -1,24 +1,42 @@
 import Mn from 'backbone.marionette';
 import defaults from 'lodash/defaults';
 
+import config from './config';
+
+// TODO: KR default region (temporarily added)
+const defaultRegion = new Mn.Region({el: 'main'});
+
 // We override the Mn.Object methods instead of using the provided extension points
 // (e.g. initialize, onDestroy), so that extensions of this application_controller
 // can still use them without having to call 'super' (or break this class' functionality).
-export const ApplicationController = Mn.Object.extend({
+const ApplicationController = Mn.Object.extend({
+  // The default channelName. Can be overridden using the setDefaultChannelName function.
+  channelName: function () {
+    return config.channelName;
+  },
 
-  constructor: function () {
-    // TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
-    // And get it from somewhere, instead of just 'knowing' it here.
-    this.channelName = 'toledo';
-    this.cidPrefix = 'controller';
-    // is this necessary? It was concise with coffeescript's @ notation, but woth ES6?
-    // this.region = options.region; // Use this.getOption('region') instead?
+  // Hijack _initRadio function in order to send event AFTER channel is initialized, but BEFORE
+  // the initialize function is called.
+  _initRadio: function () {
+    const args = Array.prototype.slice.call(arguments);
+    Mn.Object.prototype._initRadio.apply(this, args);
+    this.getChannel().trigger('controller:created', this, this.cid);
+  },
+
+  constructor: function (options = {}) {
+    // if (!options.channelName) {
+    //   throw new Error('A channelName must be specified for an ApplicationController')
+    // }
+    this.cidPrefix = 'tc';
     // TODO: KR ensure that a region is passed as an option
 
-    const args = Array.prototype.slice.call(arguments);
+    // TODO: KR add region manually for testing
+    options.region = defaultRegion;
 
+    this.region = options.region;
+
+    const args = Array.prototype.slice.call(arguments);
     Mn.Object.prototype.constructor.apply(this, args);
-    this.getChannel().trigger('controller:created', this, this.cid);
   },
 
   destroy: function () {
@@ -74,3 +92,12 @@ export const ApplicationController = Mn.Object.extend({
   }
 
 });
+
+export default ApplicationController;
+
+export function initializeApplicationController(options = {}) {
+  if (!options.channelName) {
+    throw new Error('A channelName must be provided');
+  }
+  ApplicationController.prototype.channelName = options.channelName;
+};
