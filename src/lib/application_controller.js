@@ -4,12 +4,14 @@ import defaults from 'lodash/defaults';
 import config from './config';
 
 // TODO: KR default region (temporarily added)
-const defaultRegion = new Mn.Region({el: 'main'});
+const DefaultRegion = Mn.Region.extend({constructorName: 'DefaultRegion', el: 'main'});
+const defaultRegion = new DefaultRegion();
 
 // We override the Mn.Object methods instead of using the provided extension points
 // (e.g. initialize, onDestroy), so that extensions of this application_controller
 // can still use them without having to call 'super' (or break this class' functionality).
 const ApplicationController = Mn.Object.extend({
+  constructorName: 'ApplicationController',
   // The default channelName. Can be overridden using the setDefaultChannelName function.
   channelName: function () {
     return config.channelName;
@@ -17,6 +19,8 @@ const ApplicationController = Mn.Object.extend({
 
   // Hijack _initRadio function in order to send event AFTER channel is initialized, but BEFORE
   // the initialize function is called.
+  // If we trigger it after the initialize function is called, the order of the controller:created
+  // and controller:destroyed events is wrong.
   _initRadio: function () {
     const args = Array.prototype.slice.call(arguments);
     Mn.Object.prototype._initRadio.apply(this, args);
@@ -24,9 +28,6 @@ const ApplicationController = Mn.Object.extend({
   },
 
   constructor: function (options = {}) {
-    // if (!options.channelName) {
-    //   throw new Error('A channelName must be specified for an ApplicationController')
-    // }
     this.cidPrefix = 'tc';
     // TODO: KR ensure that a region is passed as an option
 
@@ -94,10 +95,3 @@ const ApplicationController = Mn.Object.extend({
 });
 
 export default ApplicationController;
-
-export function initializeApplicationController(options = {}) {
-  if (!options.channelName) {
-    throw new Error('A channelName must be provided');
-  }
-  ApplicationController.prototype.channelName = options.channelName;
-};

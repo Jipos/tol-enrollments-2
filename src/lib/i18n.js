@@ -1,14 +1,10 @@
 import keys from 'lodash/keys';
 import isEqual from 'lodash/isEqual';
+import memoize from 'lodash/memoize';
+
+import config from './config';
 
 const _dictionary = {}
-
-const config = {
-  availableLanguages: [],
-  defaultLanguage: undefined
-};
-
-var language;
 
 function getLanguageFromUrl() {
   // http://www.jquery4u.com/snippets/url-parameters-jquery/
@@ -18,13 +14,17 @@ function getLanguageFromUrl() {
 
 function determineLanguage() {
   const language = getLanguageFromUrl();
-  if (config.availableLanguages.indexOf(language) !== -1) {
-    return language
-  } else {
-    console.log(`${language} is not a supported language. Using the default language '${config.defaultLanguage}' instead`);
-    return config.defaultLanguage;
+  if (config.debug && !language) {
+    console.log(`No language was specified. Using the default: ${config.defaultLanguage}`);
+  } else if (config.debug && config.availableLanguages.indexOf(language) === -1) {
+    console.log(`${language} is not a supported language. Using the default: ${config.defaultLanguage}`);
   }
+  return config.availableLanguages.indexOf(language) !== -1 ? language : config.defaultLanguage;
 }
+
+const getLanguage = memoize(function() {
+  return determineLanguage();
+});
 
 export function translate (key) {
   const translations = _dictionary[key];
@@ -50,17 +50,18 @@ export function addDictionary (dictionary) {
   }
 }
 
-export function initializeI18n(options = {}) {
-  if (!options.availableLanguages) {
-    throw new Error('An array of available languages is required.');
-  }
-  if (!options.defaultLanguage) {
-    throw new Error('An default languages is required.');
-  }
-  if (options.availableLanguages.indexOf(options.defaultLanguage) === -1) {
-    throw new Error('The default language must be one of the available languages.');
-  }
-  config.defaultLanguage = options.defaultLanguage;
-  config.availableLanguages = options.availableLanguages;
-  language = determineLanguage();
-}
+// export function initializeI18n(options = {}) {
+//   if (!options.availableLanguages) {
+//     throw new Error('An array of available languages is required.');
+//   }
+//   if (!options.defaultLanguage) {
+//     throw new Error('An default languages is required.');
+//   }
+//   if (options.availableLanguages.indexOf(options.defaultLanguage) === -1) {
+//     throw new Error('The default language must be one of the available languages.');
+//   }
+//   config.defaultLanguage = options.defaultLanguage;
+//   config.availableLanguages = options.availableLanguages;
+//   config.debug = options.debug || false;
+//   language = determineLanguage();
+// }

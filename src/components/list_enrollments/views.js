@@ -1,13 +1,15 @@
 import Mn from 'backbone.marionette';
 
-const ItemView = Mn.View.extend({
+const EnrollmentView = Mn.View.extend({
+  constructorName: 'EnrollmentView',
   template: function(data) {
     return `<p>listEnrollments: ${data.id}</p>`;
   },
 })
 
-export const CollectionView = Mn.NextCollectionView.extend({
-  childView: ItemView,
+export const ListEnrollmentsView = Mn.NextCollectionView.extend({
+  constructorName: 'ListEnrollmentsView',
+  childView: EnrollmentView,
   initialize: function () {
     this.listenTo(this.model, 'change', this.render);
   },

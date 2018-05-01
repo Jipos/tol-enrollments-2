@@ -1,8 +1,8 @@
-// Defines the config, which can be used by custom code, using the toledo utilities.
-// This config isn't used in the utilities internally.
-
-// NOTE: KR when using webpack, some script files are executed before the config is setup.
-// This can cause problems.
+// NOTE: KR all dependencies of ES modules are loaded before the code in the module is executed.
+// So code which initialized this config, will only be run AFTER the modules using the configure
+// are loaded. Either the config should be used asynchronously (like in application_controller),
+// or an initialization function should be exported, to be executed after the initialization of
+// this config (like in registry).
 
 function Config () {}
 
