@@ -7,8 +7,7 @@ import pick from 'lodash/pick';
 import toArray from 'lodash/toArray';
 import compact from 'lodash/compact';
 
-// TODO: KR handle the reference to 'lib' when lib is extracted from this project
-import {ApplicationController} from 'lib';
+import {ApplicationController, channel} from 'lib';
 import {LoadingView} from './views';
 
 // TODO: KR I'm not sure the opacity loadingType works correctly.
@@ -73,14 +72,10 @@ const LoadingController = ApplicationController.extend({
   }
 });
 
-export function initializeLoadingComponent (options = {}) {
-  // TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
-  // And get it from somewhere, instead of just 'knowing' it here.
-  Radio.channel(options.channelName).reply('show:loading', function(view, options) {
-    return new LoadingController({
-      view: view,
-      region: options.region,
-      config: options.loading
-    })
-  });
-};
+channel.reply('show:loading', function(view, options) {
+  return new LoadingController({
+    view: view,
+    region: options.region,
+    config: options.loading
+  })
+});

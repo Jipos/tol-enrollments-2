@@ -2,7 +2,11 @@ import keys from 'lodash/keys';
 import isEqual from 'lodash/isEqual';
 import memoize from 'lodash/memoize';
 
-import config from './config';
+// TODO: KR find a way to set this config
+const config = {
+  availableLanguages: ['en', 'nl'],
+  defaultLanguage: 'en'
+}
 
 const _dictionary = {}
 

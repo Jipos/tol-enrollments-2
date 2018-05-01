@@ -2,17 +2,18 @@ import $ from 'jquery';
 import Bb from 'backbone';
 import Mn from 'backbone.marionette';
 
-import {initialize} from 'lib';
-initialize({channelName: 'something'});
+import Radio from 'backbone.radio';
+
+import 'lib';
 
 // Register entities (for side effects)
-import initializeEnrollments from 'entities/enrollments';
+import 'entities/enrollments';
 
 import './components/enroll'; // Register enroll component
 import './components/list_enrollments'; // Register listEnrollments component
 //import Pages from './pages'
 
-initializeEnrollments();
+Radio.DEBUG = true;
 
 window.Mn = Mn;
 window.Bb = Bb;

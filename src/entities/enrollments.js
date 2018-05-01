@@ -1,12 +1,8 @@
-import {Model} from 'lib';
-import {Collection} from 'lib';
-import Radio from 'backbone.radio';
+import {Model, Collection, channel} from 'lib';
 import memoize from 'lodash/memoize';
 import extend from 'lodash/extend';
 
-import {config} from 'lib';
-
-import mockjax from 'lib/utilities/mockjax';
+import mockjax from './mockjax';
 import enrollments_me from 'entities/enrollments-me'
 
 mockjax({
@@ -41,8 +37,4 @@ const API = {
   })
 };
 
-export default function initialize() {
-  // TODO: KR make all lib utilities use the same channel. Make this channelName configurable.
-  // And get it from somewhere, instead of just 'knowing' it here.
-  Radio.channel(config.channelName).reply('enrollment:entities', () => API.getEnrollments());
-}
+channel.reply('enrollment:entities', () => API.getEnrollments());

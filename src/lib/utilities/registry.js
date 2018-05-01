@@ -1,7 +1,7 @@
 import Radio from 'backbone.radio';
 import size from 'lodash/size';
 
-import config from '../config';
+import {channel} from 'lib'
 
 const API = {
 
@@ -36,12 +36,6 @@ const API = {
   }
 }
 
-export function initializeRegistry (options = {}) {
-  if (!options.channelName) {
-    throw new Error('A channelName must be provided');
-  }
-  const channel = Radio.channel(options.channelName);
-  channel.on('controller:created', (instance, id) => API.register(instance, id));
-  channel.on('controller:destroyed', (instance, id) => API.unregister(instance, id));
-  channel.reply('reset:registry', () => API.resetRegistry());
-}
+channel.on('controller:created', (instance, id) => API.register(instance, id));
+channel.on('controller:destroyed', (instance, id) => API.unregister(instance, id));
+channel.reply('reset:registry', () => API.resetRegistry());

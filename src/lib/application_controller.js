@@ -1,7 +1,7 @@
 import Mn from 'backbone.marionette';
 import defaults from 'lodash/defaults';
 
-import config from './config';
+import {channel} from 'lib';
 
 // TODO: KR default region (temporarily added)
 const DefaultRegion = Mn.Region.extend({constructorName: 'DefaultRegion', el: 'main'});
@@ -12,10 +12,7 @@ const defaultRegion = new DefaultRegion();
 // can still use them without having to call 'super' (or break this class' functionality).
 const ApplicationController = Mn.Object.extend({
   constructorName: 'ApplicationController',
-  // The default channelName. Can be overridden using the setDefaultChannelName function.
-  channelName: function () {
-    return config.channelName;
-  },
+  channelName: 'toledo',
 
   // Hijack _initRadio function in order to send event AFTER channel is initialized, but BEFORE
   // the initialize function is called.

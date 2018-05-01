@@ -54,40 +54,42 @@ import './config/marionette/object'; // when debug is disabled, this fix doesn't
 export {default as ApplicationController} from './application_controller';
 export {Model} from './entities/model';
 export {Collection} from './entities/collection';
-export {default as config} from './config';
+export {default as channel} from './utilities/channel';
+
+// eventHandlers
+import './utilities/registry';
+import './components/loading';
+import './utilities/fetch'
 
 // initializers
 // Initializing both the base classes (if necessary) and internal classes/components.
-import {initializeConfig} from './config';
-import {initializeRegistry} from './utilities/registry';
-import {initializeLoadingComponent} from './components/loading';
-import {initializeWhenFetched} from './utilities/fetch';
+// import {initializeConfig} from './config';
+// import {initializeRegistry} from './utilities/registry';
+// import {initializeLoadingComponent} from './components/loading';
+// import {initializeWhenFetched} from './utilities/fetch';
 
-// Export an initialize function, for running the initializers
-export const initialize = once(function (options = {}) {
-
-    defaults(options, {
-      channelName: 'toledo',
-      debug: true,
-      availableLanguages: ['en'],
-      defaultLanguage: 'en'
-    });
-
-    if (options.availableLanguages.indexOf(options.defaultLanguage) === -1) {
-      throw new Error(`The default language (${options.defaultLanguage}) must be one of the available languages (${options.availableLanguages}).`);
-    }
-
-    initializeConfig(options);
-
-    initializeRegistry(options);
-    initializeLoadingComponent(options);
-    initializeWhenFetched(options);
-
-    if (options.debug) {
-      // Enable Radio's debug logging
-      Radio.DEBUG = true;
-      // Expose the channel (i.e. make it accessible in the browser dev tools)
-      window.channel = Radio.channel(options.channelName);
-    }
-
-});
+// // Export an initialize function, for running the initializers
+// export const initialize = once(function (options = {}) {
+//
+//     defaults(options, {
+//       channelName: 'toledo',
+//       debug: true,
+//       availableLanguages: ['en'],
+//       defaultLanguage: 'en'
+//     });
+//
+//     if (options.availableLanguages.indexOf(options.defaultLanguage) === -1) {
+//       throw new Error(`The default language (${options.defaultLanguage}) must be one of the available languages (${options.availableLanguages}).`);
+//     }
+//
+//     initializeLoadingComponent(options);
+//     initializeWhenFetched(options);
+//
+//     if (options.debug) {
+//       // Enable Radio's debug logging
+//       Radio.DEBUG = true;
+//       // Expose the channel (i.e. make it accessible in the browser dev tools)
+//       window.channel = Radio.channel(options.channelName);
+//     }
+//
+// });
