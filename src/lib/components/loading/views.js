@@ -3,6 +3,7 @@ import {Spinner} from 'spin.js';
 
 window.Spinner = Spinner;
 export const LoadingView = Mn.View.extend({
+  constructorName: 'LoadingView',
   template: false,
   className: 'loading-container',
   onRender: function () {

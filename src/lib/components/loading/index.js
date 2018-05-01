@@ -7,12 +7,14 @@ import pick from 'lodash/pick';
 import toArray from 'lodash/toArray';
 import compact from 'lodash/compact';
 
-import ApplicationController from 'lib/application_controller';
+// TODO: KR handle the reference to 'lib' when lib is extracted from this project
+import {ApplicationController} from 'lib';
 import {LoadingView} from './views';
 
 // TODO: KR I'm not sure the opacity loadingType works correctly.
 // The cleanup of the realView for this type seems to be missing
 const LoadingController = ApplicationController.extend({
+  constructorName: 'LoadingController',
   initialize: function (options = {}) {
     // TODO: KR ensure the following options: view, region and config
     var { view, config } = options;

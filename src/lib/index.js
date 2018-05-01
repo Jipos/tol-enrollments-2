@@ -40,51 +40,49 @@
 // Vendor functions
 import once from 'lodash/once';
 import defaults from 'lodash/defaults';
+import Radio from 'backbone.radio';
 
 // Vendor customizations
+import './config/namedConstructors';
+import './config/cocktail';
 import './config/backbone/sync';
 import './config/marionette/renderer';
 import './config/marionette/object'; // when debug is disabled, this fix doesn't really matter
 
 // Classes
 // Base classes to be used in applications
-import ApplicationController from './application_controller';
-import {Model} from './entities/model';
-import {Collection} from './entities/collection'
+export {default as ApplicationController} from './application_controller';
+export {Model} from './entities/model';
+export {Collection} from './entities/collection';
+export {default as channel} from './utilities/channel';
+
+// eventHandlers
+import './utilities/registry';
+import './components/loading';
 
 // initializers
 // Initializing both the base classes (if necessary) and internal classes/components.
-import {initializeConfig} from './config';
-import {initializeRegistry} from './utilities/registry';
-import {initializeLoadingComponent} from './components/loading';
-import {initializeApplicationController} from './application_controller';
-import {initializeWhenFetched} from './utilities/fetch';
-import {initializeI18n} from './utilities/i18n';
-
-// Export the Classes
-export default {
-  Model: Model,
-  Collection: Collection,
-  ApplicationController: ApplicationController
-}
+// import {initializeConfig} from './config';
+// import {initializeRegistry} from './utilities/registry';
+// import {initializeLoadingComponent} from './components/loading';
+// import {initializeWhenFetched} from './utilities/fetch';
 
 // Export an initialize function, for running the initializers
 export const initialize = once(function (options = {}) {
 
     defaults(options, {
       channelName: 'toledo',
-      debug: false,
+      debug: true,
       availableLanguages: ['en'],
       defaultLanguage: 'en'
     });
 
-    initializeI18n(options);
-    initializeRegistry(options);
-    initializeLoadingComponent(options);
-    initializeApplicationController(options);
-    initializeWhenFetched(options);
+    if (options.availableLanguages.indexOf(options.defaultLanguage) === -1) {
+      throw new Error(`The default language (${options.defaultLanguage}) must be one of the available languages (${options.availableLanguages}).`);
+    }
 
-    initializeConfig(options);
+    initializeLoadingComponent(options);
+    initializeWhenFetched(options);
 
     if (options.debug) {
       // Enable Radio's debug logging
