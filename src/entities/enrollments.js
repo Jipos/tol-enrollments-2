@@ -2,15 +2,6 @@ import {Model, Collection, channel} from 'lib';
 import memoize from 'lodash/memoize';
 import extend from 'lodash/extend';
 
-import mockjax from './mockjax';
-import enrollments_me from 'entities/enrollments-me'
-
-mockjax({
-  url: '/api/enrollments/me',
-  responseText: enrollments_me,
-  responseTime: 2000
-});
-
 const Enrollment = Model.extend({
   constructorName: 'Enrollment'
 });
@@ -38,3 +29,8 @@ const API = {
 };
 
 channel.reply('enrollment:entities', () => API.getEnrollments());
+<<<<<<< HEAD
+=======
+
+window.Enrollments = Enrollments;
+>>>>>>> Correction after accidental reset from branch (part 2)

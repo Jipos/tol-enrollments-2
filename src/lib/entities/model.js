@@ -4,7 +4,9 @@ import clone from 'lodash/clone';
 import omit from 'lodash/omit';
 import bind from 'lodash/bind';
 
-export const Model = Bb.Model.extend({
+export default Bb.Model.extend({
+
+  constructorName: 'Model',
 
   destroy: function (options = {}) {
     defaults(options, {wait: true});

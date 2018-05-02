@@ -37,11 +37,6 @@
 // TODO: KR registering the loading component with the channel has to wait until the initialization
 // has finished. Otherwise, we won't know which channel to listen to.
 
-// Vendor functions
-import once from 'lodash/once';
-import defaults from 'lodash/defaults';
-import Radio from 'backbone.radio';
-
 // Vendor customizations
 import './config/namedConstructors';
 import './config/cocktail';
@@ -49,17 +44,19 @@ import './config/backbone/sync';
 import './config/marionette/renderer';
 import './config/marionette/object'; // when debug is disabled, this fix doesn't really matter
 
-// Classes
-// Base classes to be used in applications
-export {default as ApplicationController} from './application_controller';
-export {Model} from './entities/model';
-export {Collection} from './entities/collection';
-export {default as channel} from './utilities/channel';
-
-// eventHandlers
+// functionality accessible through the channel.
+// to be used in applications (and used in this lib itself too)
 import './utilities/registry';
 import './components/loading';
 import './utilities/fetch'
+
+// Classes
+// Base classes to be used in applications
+export {default as ApplicationController} from './application_controller';
+export {default as Model} from './entities/model';
+export {Collection} from './entities/collection';
+export {default as channel} from './utilities/channel';
+
 
 // initializers
 // Initializing both the base classes (if necessary) and internal classes/components.
