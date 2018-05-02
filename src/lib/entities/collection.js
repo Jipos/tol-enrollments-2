@@ -1,7 +1,7 @@
 import Bb from 'backbone';
 import defaults from 'lodash/defaults';
 
-export const Collection = Bb.Collection.extend({
+export default Bb.Collection.extend({
 
   constructorName: 'Collection',
 

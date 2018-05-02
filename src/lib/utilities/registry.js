@@ -1,7 +1,7 @@
 import Radio from 'backbone.radio';
 import size from 'lodash/size';
 
-import {channel} from 'lib'
+import channel from './channel'
 
 const API = {
 

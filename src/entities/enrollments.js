@@ -29,8 +29,3 @@ const API = {
 };
 
 channel.reply('enrollment:entities', () => API.getEnrollments());
-<<<<<<< HEAD
-=======
-
-window.Enrollments = Enrollments;
->>>>>>> Correction after accidental reset from branch (part 2)

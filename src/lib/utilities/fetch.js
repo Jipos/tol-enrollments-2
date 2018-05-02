@@ -3,7 +3,7 @@ import Radio from 'backbone.radio';
 import flatten from 'lodash/flatten';
 import map from 'lodash/map';
 
-import {channel} from 'lib';
+import channel from './channel';
 
 // Resolves when all of the specified entities are fetched.
 // Returns a promise.

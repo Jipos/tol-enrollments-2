@@ -10,6 +10,9 @@ const defaultRegion = new DefaultRegion();
 // We override the Mn.Object methods instead of using the provided extension points
 // (e.g. initialize, onDestroy), so that extensions of this application_controller
 // can still use them without having to call 'super' (or break this class' functionality).
+// NOTE: KR we need the ApplicationController variable in order to be able to do an instance checking
+// see the _isController function. So this is why we don't use
+//   export default Mn.Object.extend({...})
 const ApplicationController = Mn.Object.extend({
   constructorName: 'ApplicationController',
   channelName: 'toledo',

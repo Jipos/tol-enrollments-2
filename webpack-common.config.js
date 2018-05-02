@@ -52,6 +52,20 @@ module.exports = {
         use: [
           'file-loader'
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: [{
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }, {
+          loader: 'sass-loader' // compiles Sass to CSS
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: [{
+          loader: 'css-loader', // translates CSS into CommonJS modules
+        }]
       }
     ]
   }

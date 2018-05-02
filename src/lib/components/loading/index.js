@@ -7,7 +7,8 @@ import pick from 'lodash/pick';
 import toArray from 'lodash/toArray';
 import compact from 'lodash/compact';
 
-import {ApplicationController, channel} from 'lib';
+import ApplicationController from '../../application_controller';
+import channel from '../../utilities/channel';
 import {LoadingView} from './views';
 
 // TODO: KR I'm not sure the opacity loadingType works correctly.
