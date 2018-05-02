@@ -15,6 +15,8 @@ import './components/list_enrollments'; // Register listEnrollments component
 
 Radio.DEBUG = true;
 
+import './mockdata';
+
 window.Mn = Mn;
 window.Bb = Bb;
 window.jQuery = $;
