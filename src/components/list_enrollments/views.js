@@ -1,10 +1,9 @@
 import Mn from 'backbone.marionette';
+import enrollmentTemplate from './enrollment.hbs';
 
 const EnrollmentView = Mn.View.extend({
   constructorName: 'EnrollmentView',
-  template: function(data) {
-    return `<p>listEnrollments: ${data.id}</p>`;
-  },
+  template: enrollmentTemplate
 })
 
 export const ListEnrollmentsView = Mn.NextCollectionView.extend({

@@ -62,11 +62,15 @@ import {default as _channel} from './utilities/channel';
 import {default as _ApplicationController} from './application_controller';
 import {default as _Model} from './entities/model';
 import {default as _Collection} from './entities/collection';
+import {addDictionary as _addDictionary} from './i18n';
+import {translate as _translate} from './i18n';
 
 export const channel = _channel;
 export const ApplicationController = _ApplicationController;
 export const Model = _Model;
 export const Collection = _Collection;
+export const addDictionary = _addDictionary;
+export const translate = _translate;
 
 // initializers
 // Initializing both the base classes (if necessary) and internal classes/components.

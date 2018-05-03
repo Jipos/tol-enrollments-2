@@ -1,6 +1,8 @@
 import 'bootstrap/scss/bootstrap.scss';
 import './main.scss';
 
+import './backbone.toledo.handlebars';
+
 import $ from 'jquery';
 import Bb from 'backbone';
 

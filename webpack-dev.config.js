@@ -44,8 +44,7 @@ module.exports = {
       // Enable the html-webpack-template plugin, for generating a richer index.html
       inject: false,
       template: require('html-webpack-template'),
-      appMountId: 'app',
-      appMountHtmlSnippet: '  <header></header>\n      <main></main>',
+      bodyHtmlSnippet: '  <header></header>\n      <main></main>',
       title: 'Toledo admin tools',
       // Additional settings for the index.html, using html-webpack-template plugin
       meta: [
