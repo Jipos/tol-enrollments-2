@@ -16,8 +16,7 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     alias: {
-      lib: path.resolve(__dirname, 'src/lib/'),
-      entities: path.resolve(__dirname, 'src/entities/')
+      'backbone.toledo': path.resolve(__dirname, 'src/backbone.toledo/')
     }
   },
   // Optimize the output
@@ -63,7 +62,7 @@ module.exports = {
     }),
     // Extract the css snippets into a separate CSS file, loaded using a link element
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
+      filename: '[name].[chunkhash].css',
     }),
     // Minify the CSS assets (removing duplicate and grouping similar styles)
     new OptimizeCssAssetsPlugin({
@@ -104,25 +103,42 @@ module.exports = {
       //   ]
       // },
       // import scss files
+      // TODO: KR find a way to extract the css source maps into a separate .map file
+      // Debugging the loaders seems to reveal that the source and the sourcemaps are stored separately
+      // until the last step (i.e. MiniCssExtractPlugin). So inside the MiniCssExtractPlugin loaders
+      // There is an object containing both the source and the sourcemaps. It's not yet clear how this
+      // gets transformed into actual files. But it seems that that's where things go wrong.
+      // [update] the two seem to get combined by the MiniCssExtractPlugin (the plugin, not the loader)
+      // the plugin doesn't seem to provide a way to write the sourcemaps as a separate file.
       {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
-          },
-          // translates CSS into CommonJS modules
-          {
-            loader: 'css-loader', options: {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
                 sourceMap: true
             }
           },
-          //
+          // translates CSS into CommonJS modules
+          {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true,
+                importLoaders: 1
+            }
+          },
+          // NOTE: KR an attempt to extract the source maps into a .map file, but it didn't work.
           // {
-          //   loader: 'resolve-url-loader'
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     parser: require('postcss-scss'), // errors are thrown without this.
+          //     sourceMap: 'map'
+          //   }
           // },
           // compiles Sass to CSS
           {
-            loader: 'sass-loader', options: {
+            loader: 'sass-loader',
+            options: {
                 sourceMap: true
             }
           }

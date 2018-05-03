@@ -1,7 +1,7 @@
 import Mn from 'backbone.marionette';
 import defaults from 'lodash/defaults';
 
-import {channel} from 'lib';
+import {channel} from './utilities/channel';
 
 // TODO: KR default region (temporarily added)
 const DefaultRegion = Mn.Region.extend({constructorName: 'DefaultRegion', el: 'main'});

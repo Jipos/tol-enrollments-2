@@ -23,14 +23,14 @@ module.exports = {
   // Define the entry points (JS)
   entry: {
     app: './src/index.js',
-    mockdata: './src/mockdata'
+    mockdata: './src/mockdata/index.js',
+    development: './src/development.js'
   },
   // Enable source maps (outputted as an external file, but evaluated each time for speed)
   devtool: 'eval-source-map',
   resolve: {
     alias: {
-      lib: path.resolve(__dirname, 'src/lib/'),
-      entities: path.resolve(__dirname, 'src/entities/')
+      'backbone.toledo': path.resolve(__dirname, 'src/backbone.toledo/')
     }
   },
   plugins: [
@@ -67,6 +67,11 @@ module.exports = {
            presets: ['es2015']
         }
       },
+      // import handlebars templates
+      {
+        test: /\.hbs/,
+        loader: 'handlebars-loader'
+      },
       // import images (and handle references to them in HTML and CSS files)
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -98,11 +103,15 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
+            options: {
+                sourceMap: true
+            }
           },
           // translates CSS into CommonJS modules
           {
-            loader: 'css-loader', options: {
+            loader: 'css-loader',
+            options: {
                 sourceMap: true
             }
           },
@@ -112,7 +121,8 @@ module.exports = {
           // },
           // compiles Sass to CSS
           {
-            loader: 'sass-loader', options: {
+            loader: 'sass-loader',
+            options: {
                 sourceMap: true
             }
           }

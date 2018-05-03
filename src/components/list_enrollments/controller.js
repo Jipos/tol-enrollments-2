@@ -1,4 +1,4 @@
-import {ApplicationController} from 'lib';
+import {ApplicationController} from 'backbone.toledo';
 import {ListEnrollmentsView} from './views';
 import Bb from 'backbone';
 import random from 'lodash/random';

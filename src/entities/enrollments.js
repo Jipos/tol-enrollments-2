@@ -1,4 +1,4 @@
-import {Model, Collection, channel} from 'lib';
+import {Model, Collection, channel} from 'backbone.toledo';
 import memoize from 'lodash/memoize';
 import extend from 'lodash/extend';
 
