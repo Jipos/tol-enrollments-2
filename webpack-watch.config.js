@@ -12,25 +12,5 @@ module.exports = merge(common, {
     },
     inline: true,
     open: true
-  },
-  resolve: {
-    alias: {
-      lib: path.resolve(__dirname, 'src/lib/'),
-      entities: path.resolve(__dirname, 'src/entities/')
-    }
   }
-  // optimization: {
-  //   runtimeChunk: {
-  //     name: 'manifest'
-  //   },
-  //   splitChunks: {
-  //       cacheGroups: {
-  //           commons: {
-  //               test: /[\\/]node_modules[\\/]/,
-  //               name: 'vendor',
-  //               chunks: 'all'
-  //           }
-  //       }
-  //   }
-  // }
 });

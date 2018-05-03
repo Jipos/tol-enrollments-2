@@ -3,12 +3,27 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+class ReuseImportsBetweenEntrypointsPlugin {
+  apply(compiler) {
+    // TODO: KR DeprecationWarning: Tapable.plugin is deprecated. Use new API on `.hooks` instead
+    compiler.plugin('compilation', function(compilation) {
+      compilation.mainTemplate.hooks.localVars.tap("SharedLocalVars", (source, chunk, hash) => {
+        // NOTE: KR this patch expects the 'this' to be the browser window.
+        // If this changes at any point (e.g. after a webpack update), this Plugin might stop working.
+        return source + "\n\n// PATCH: KR Use a shared instead of a local module cache\n" +
+               "var installedModules = this['webpackInstalledModules'] = this['webpackInstalledModules'] || {};";
+      });
+    });
+  }
+}
+
 module.exports = {
   // Set the mode to 'development', enabling some development settings
   mode: 'development',
   // Define the entry points (JS)
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
+    mockdata: './src/mockdata'
   },
   // Enable source maps (outputted as an external file, but evaluated each time for speed)
   devtool: 'eval-source-map',
@@ -19,6 +34,9 @@ module.exports = {
     }
   },
   plugins: [
+    // NOTE: KR Necessary for adding the mockData as a separate entrypoint which uses the same jQuery
+    // instance as the app entrypoint.
+    new ReuseImportsBetweenEntrypointsPlugin(),
     // Clear the dist folder each build (to avoid issues with left over files)
     new CleanWebpackPlugin(['dist']),
     // Generate the index.html page

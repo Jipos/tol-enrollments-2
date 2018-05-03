@@ -26,7 +26,7 @@ $(function () {
 
 Radio.DEBUG = true;
 
-import './mockdata';
+// import './mockdata';
 
 window.Mn = Mn;
 window.Bb = Bb;
