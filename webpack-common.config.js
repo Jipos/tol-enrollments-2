@@ -53,20 +53,45 @@ module.exports = {
           'file-loader'
         ]
       },
+      // load scss snippets as separate style elements
       {
         test: /\.scss$/,
-        use: [{
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        }, {
-          loader: 'sass-loader' // compiles Sass to CSS
-        }]
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          // translates CSS into CommonJS modules
+          {
+            loader: 'css-loader', options: {
+                sourceMap: true
+            }
+          },
+          //
+          // {
+          //   loader: 'resolve-url-loader'
+          // },
+          // compiles Sass to CSS
+          {
+            loader: 'sass-loader', options: {
+                sourceMap: true
+            }
+          }
+        ]
       },
-      {
-        test: /\.css$/,
-        use: [{
-          loader: 'css-loader', // translates CSS into CommonJS modules
-        }]
-      }
+      // load css snippets as separate style elements
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: 'style-loader'
+      //     },
+      //     {
+      //       loader: 'css-loader', options: {
+      //           sourceMap: true
+      //       }
+      //     }
+      //   ]
+      // }
     ]
   }
 };

@@ -49,21 +49,6 @@ module.exports = {
            presets: ['es2015']
         }
       },
-      // load css snippets as separate style elements
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              attrs: {component: "[name]@[version]"}
-            }
-          },
-          {
-            loader: 'css-loader'
-          }
-        ]
-      },
       // import images (and handle references to them in HTML and CSS files)
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -76,6 +61,43 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader'
+        ]
+      },
+      // load css snippets as separate style elements
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: 'style-loader'
+      //     },
+      //     {
+      //       loader: 'css-loader'
+      //     }
+      //   ]
+      // },
+      // load scss snippets as separate style elements
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          // translates CSS into CommonJS modules
+          {
+            loader: 'css-loader', options: {
+                sourceMap: true
+            }
+          },
+          //
+          // {
+          //   loader: 'resolve-url-loader'
+          // },
+          // compiles Sass to CSS
+          {
+            loader: 'sass-loader', options: {
+                sourceMap: true
+            }
+          }
         ]
       }
     ]

@@ -88,15 +88,41 @@ module.exports = {
         }
       },
       // import css files
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     {
+      //       loader: MiniCssExtractPlugin.loader
+      //     },
+      //     {
+      //       loader: "css-loader?sourceMap",
+      //       options: {
+      //         sourceMap: true
+      //       }
+      //     }
+      //   ]
+      // },
+      // import scss files
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader},
+            loader: MiniCssExtractPlugin.loader
+          },
+          // translates CSS into CommonJS modules
           {
-            loader: "css-loader?sourceMap",
-            options: {
-              sourceMap: true
+            loader: 'css-loader', options: {
+                sourceMap: true
+            }
+          },
+          //
+          // {
+          //   loader: 'resolve-url-loader'
+          // },
+          // compiles Sass to CSS
+          {
+            loader: 'sass-loader', options: {
+                sourceMap: true
             }
           }
         ]

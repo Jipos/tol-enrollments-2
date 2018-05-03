@@ -1,3 +1,6 @@
+import 'bootstrap/scss/bootstrap.scss';
+import './main.scss';
+
 import $ from 'jquery';
 import Bb from 'backbone';
 import Mn from 'backbone.marionette';
