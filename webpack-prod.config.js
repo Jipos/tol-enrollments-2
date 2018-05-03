@@ -51,19 +51,20 @@ module.exports = {
       template: require('html-webpack-template'),
       // Additional settings for the index.html, using html-webpack-template plugin
       appMountId: 'app',
-      appMountHtmlSnippet: '<div class="app-spinner"><i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true">Loading</i></div>',
-      headHtmlSnippet: '<style>div.app-spinner {position: fixed;top:50%;left:50%;}</style >',
-      bodyHtmlSnippet: '<custom-element></custom-element>',
-      title: 'tol-enrollments',
+      appMountHtmlSnippet: '  <header></header>\n      <main></main>',
+      title: 'Toledo admin tools',
+      // Additional settings for the index.html, using html-webpack-template plugin
       meta: [
         {
           name: 'description',
-          content: 'A better default template for html-webpack-plugin.'
+          content: 'Admin tools for your Toledo enrollments.'
         }
       ]
     }),
     // Extract the css snippets into a separate CSS file, loaded using a link element
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+    }),
     // Minify the CSS assets (removing duplicate and grouping similar styles)
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,

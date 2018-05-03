@@ -40,7 +40,7 @@ function validateConstructorName(constructorName) {
   }
 }
 
-const originalExtend = Backbone.Model.extend;
+const originalExtend = Bb.Model.extend;
 const extendWithConstructorName = function(protoProps, classProps) {
   const parent = this;
   if (protoProps.constructorName && !protoProps.hasOwnProperty('constructor')) {
