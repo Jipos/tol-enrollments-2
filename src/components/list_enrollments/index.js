@@ -22,6 +22,6 @@ const ListEnrollmentsRouter = Mn.AppRouter.extend({
 
 const router = new ListEnrollmentsRouter({controller: API});
 
-channel.on('start:listEnrollments:app', function () {
+channel.on('show:listEnrollments:component', function () {
   router.navigate('listEnrollments', {trigger: true});
 });

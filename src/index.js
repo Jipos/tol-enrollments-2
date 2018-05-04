@@ -18,11 +18,17 @@ customizeI18n({
 // This works, because the entire lib is exported as a whole and using 1 of it's components
 // required loading all of it and this will initialize the lib.
 
+import './regions';
+
 // Register entities (for side effects)
 import './entities/enrollments';
 
 import './components/enroll'; // Register enroll component
 import './components/list_enrollments'; // Register listEnrollments component
+import './components/header'; // Register header component
+
+import {channel} from 'backbone.toledo';
+channel.trigger('show:header:component');
 
 import $ from 'jquery';
 import Bb from 'backbone';

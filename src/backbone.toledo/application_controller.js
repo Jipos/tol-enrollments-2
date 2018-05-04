@@ -3,10 +3,6 @@ import _ from 'underscore';
 
 import {channel} from './utilities/channel';
 
-// TODO: KR default region (temporarily added)
-const DefaultRegion = Mn.Region.extend({constructorName: 'DefaultRegion', el: 'main'});
-const defaultRegion = new DefaultRegion();
-
 // We override the Mn.Object methods instead of using the provided extension points
 // (e.g. initialize, onDestroy), so that extensions of this application_controller
 // can still use them without having to call 'super' (or break this class' functionality).
@@ -17,22 +13,29 @@ const ApplicationController = Mn.Object.extend({
   constructorName: 'ApplicationController',
   channelName: 'toledo',
 
-  // Hijack _initRadio function in order to send event AFTER channel is initialized, but BEFORE
-  // the initialize function is called.
-  // If we trigger it after the initialize function is called, the order of the controller:created
-  // and controller:destroyed events is wrong.
   _initRadio: function () {
     const args = Array.prototype.slice.call(arguments);
     Mn.Object.prototype._initRadio.apply(this, args);
+    // 1. Hijack _initRadio function in order to send event AFTER channel is initialized, but BEFORE
+    // the initialize function is called.
+    // If we trigger it after the initialize function is called, the order of the controller:created
+    // and controller:destroyed events is wrong.
     this.getChannel().trigger('controller:created', this, this.cid);
+    // 2. Hijack the _initRadio function to ensure that a region is set.
+    this._ensureRegion();
+  },
+
+  _ensureRegion: function() {
+    if (!this.region) {
+      this.region = this.getChannel().request('default:region');
+    }
+   if (!this.region) {
+     throw new Error('An applicationController requires a region.');
+   }
   },
 
   constructor: function (options = {}) {
     this.cidPrefix = 'tc';
-    // TODO: KR ensure that a region is passed as an option
-
-    // TODO: KR add region manually for testing
-    options.region = defaultRegion;
 
     this.region = options.region;
 
@@ -53,7 +56,7 @@ const ApplicationController = Mn.Object.extend({
   show: function (view, options = {}) {
     _.defaults(options, {
       loading: false,
-      region: this.getOption('region')
+      region: this.region
     });
     // Allow us to pass in a controller instance instead of a views
     // if a controller instance, set the view to the mainView of the controller

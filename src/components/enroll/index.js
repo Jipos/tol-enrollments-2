@@ -14,6 +14,6 @@ const EnrollRouter = Mn.AppRouter.extend({
 
 const router = new EnrollRouter({controller: API});
 
-channel.on('start:enroll:app', function () {
+channel.on('show:enroll:component', function () {
   router.navigate('enroll', {trigger: true});
 });

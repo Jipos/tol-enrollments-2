@@ -5,6 +5,13 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const bodyHtmlSnippet = `
+    <div class="container-fluid">
+      <header></header>
+      <main></main>
+      <footer></footer>
+    </div>`;
+
 module.exports = {
   // Set the mode to 'production', enabling some production settings
   mode: 'production',

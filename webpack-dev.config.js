@@ -17,6 +17,13 @@ class ReuseImportsBetweenEntrypointsPlugin {
   }
 }
 
+const bodyHtmlSnippet = `
+    <div class="container-fluid">
+      <header></header>
+      <main></main>
+      <footer></footer>
+    </div>`;
+
 module.exports = {
   // Set the mode to 'development', enabling some development settings
   mode: 'development',
@@ -45,7 +52,7 @@ module.exports = {
       // Enable the html-webpack-template plugin, for generating a richer index.html
       inject: false,
       template: require('html-webpack-template'),
-      bodyHtmlSnippet: '  <header></header>\n      <main></main>',
+      bodyHtmlSnippet: bodyHtmlSnippet,
       title: 'Toledo admin tools',
       // Additional settings for the index.html, using html-webpack-template plugin
       meta: [
@@ -115,9 +122,19 @@ module.exports = {
                 sourceMap: true
             }
           },
-          //
+          // TODO: KR make post-css add vendor specific rules.
+          //   E.g. for
+          //           appearance: none;
+          //        it will add:
+          //            -webkit-appearance: none;
+          //            -moz-appearance: none;
+          // NOTE: KR an attempt to extract the source maps into a .map file, but it didn't work.
           // {
-          //   loader: 'resolve-url-loader'
+          //   loader: 'postcss-loader',
+          //   options: {
+          //     parser: require('postcss-scss'), // errors are thrown without this.
+          //     sourceMap: 'map'
+          //   }
           // },
           // compiles Sass to CSS
           {

@@ -1,0 +1,47 @@
+<div class="row pt-3">
+  <div class="col-12">
+    <div class="card text-white bg-info mb-3">
+      <div class="row p-2">
+        <div class="col-6">
+          <h2 class="mb-0">What do you want to do?</h2>
+        </div>
+        <div class="col-6">
+          <select class="custom-select">
+
+            <optgroup label="Tools for everybody">
+              <option value="enrollments" class="tol-navigation-all">View my enrollments</option>
+              <option value="enrollments/unenroll" class="tol-navigation-all">Unenroll</option>
+              <option value="enrollAsLearnerByLearningUnit" class="tol-navigation-all">Enroll</option>
+            </optgroup>
+
+
+              <optgroup label="Only for staff">
+                <option value="learningUnits/update/active" class="tol-navigation-staff">Courses &amp; communities: availabilty</option>
+                <option value="learningUnits/update/enrollPolicy" class="tol-navigation-staff">Courses &amp; communities: security</option>
+                <option value="communities/create" class="tol-navigation-staff">Communities: create a new one</option>
+                <option value="communities" class="tol-navigation-staff">Communities: manage</option>
+              </optgroup>
+
+
+
+              <optgroup label="Only for helpdesk">
+                <option value="listUserEnrollments" class="tol-navigation-helpdesk">Find another user's enrollments</option>
+              </optgroup>
+
+
+
+              <optgroup label="Only for local admin">
+                <option value="listUserEnrollmentsToEnrollAsAdministrator" class="tol-navigation-localAdmin">Enroll as assistant (by user)</option>
+                <option value="enrollAsAdministratorByLearningUnit" class="tol-navigation-localAdmin">Enroll as assistant (by course/community)</option>
+                <option value="bcourses/create" class="tol-navigation-localAdmin">B-courses: create a new one</option>
+                <option value="bcourses" class="tol-navigation-localAdmin">B-courses: manage</option>
+                <option value="batch/enroll" class="tol-navigation-localAdmin">Batch enroll users</option>
+              </optgroup>
+
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="links"></div>
