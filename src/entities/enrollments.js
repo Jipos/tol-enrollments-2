@@ -1,6 +1,5 @@
 import {Model, Collection, channel} from 'backbone.toledo';
-import memoize from 'lodash/memoize';
-import extend from 'lodash/extend';
+import _ from 'underscore';
 
 const Enrollment = Model.extend({
   constructorName: 'Enrollment'
@@ -23,7 +22,7 @@ const API = {
   // TODO: KR do we need a way to force a reload?
   // TODO: KR is there ever a need to create a new Collection? We might want to re-fetch it.
   //       but the existing Collection should be fine.
-  getEnrollments: memoize(function (userId = 'me') {
+  getEnrollments: _.memoize(function (userId = 'me') {
     return new Enrollments({userId: userId});
   })
 };

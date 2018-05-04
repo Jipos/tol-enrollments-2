@@ -1,7 +1,6 @@
 import {ApplicationController} from 'backbone.toledo';
 import {EnrollView} from './views';
 import Bb from 'backbone';
-import random from 'lodash/random';
 
 const EnrollController = ApplicationController.extend({
 
@@ -12,7 +11,7 @@ const EnrollController = ApplicationController.extend({
     this.show(enrollView, {loading: true});
   },
   getEnrollView: function() {
-    const model = new Bb.Model({val: random(1,100)});
+    const model = new Bb.Model({val: Math.ceil(100 * Math.random())});
     return new EnrollView({model: model});
   }
 

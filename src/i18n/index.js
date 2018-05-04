@@ -1,6 +1,4 @@
-import keys from 'lodash/keys';
-import isEqual from 'lodash/isEqual';
-import memoize from 'lodash/memoize';
+import _ from 'underscore';
 
 var language;
 
@@ -58,8 +56,8 @@ export function translate (key) {
 export function addTranslations (translations) {
   for (var key in translations) {
     var translation = translations[key];
-    var languages = keys(translation)
-    if (config.debug && !isEqual(config.availableLanguages, languages)) {
+    var languages = _.keys(translation)
+    if (config.debug && !_.isEqual(config.availableLanguages, languages)) {
       console.log(`The translations for key '${key}' cannot be added to the dictionary, because the wrong translations are found [${languages}] instead of [${config.availableLanguages}].`);
     } else if (config.debug && dictionary[key]) {
       console.log(`The translations for key '${key}' cannot be added to the dictionary, because it already contains translations for that key.`);
