@@ -56,7 +56,6 @@ export function translate (key) {
 //     ...
 //   }
 export function addTranslations (translations) {
-  console.log('i18n before', dictionary, translations);
   for (var key in translations) {
     var translation = translations[key];
     var languages = keys(translation)
@@ -68,7 +67,6 @@ export function addTranslations (translations) {
       dictionary[key] = translation
     }
   }
-  console.log('i18n after', dictionary);
 }
 
 // The default configuration
