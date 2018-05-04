@@ -30,7 +30,8 @@ module.exports = {
   devtool: 'eval-source-map',
   resolve: {
     alias: {
-      'backbone.toledo': path.resolve(__dirname, 'src/backbone.toledo/')
+      'backbone.toledo': path.resolve(__dirname, 'src/backbone.toledo/'),
+      'i18n': path.resolve(__dirname, 'src/i18n/')
     }
   },
   plugins: [

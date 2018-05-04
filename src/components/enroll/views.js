@@ -1,8 +1,7 @@
 import Mn from 'backbone.marionette';
+import enrollTemplate from './enroll.hbs'
 
 export const EnrollView = Mn.View.extend({
   constructorName: 'EnrollView',
-  template: function(data) {
-    return `<h2>test: ${data.val}</h2>`;
-  }
+  template: enrollTemplate
 });

@@ -42,13 +42,13 @@ import './config/namedConstructors';
 import './config/cocktail';
 import './config/backbone/sync';
 import './config/marionette/renderer';
-import './config/marionette/object'; // when debug is disabled, this fix doesn't really matter
+import './config/marionette/object'; // This is only relevant when Radio.DEBUG === true
 
 // functionality accessible through the channel.
 // to be used in applications (and used in this lib itself too)
 import './utilities/registry';
 import './components/loading';
-import './utilities/fetch'
+import './utilities/fetch';
 
 // Classes
 // Base classes to be used in applications
@@ -62,15 +62,11 @@ import {default as _channel} from './utilities/channel';
 import {default as _ApplicationController} from './application_controller';
 import {default as _Model} from './entities/model';
 import {default as _Collection} from './entities/collection';
-import {addDictionary as _addDictionary} from './i18n';
-import {translate as _translate} from './i18n';
 
 export const channel = _channel;
 export const ApplicationController = _ApplicationController;
 export const Model = _Model;
 export const Collection = _Collection;
-export const addDictionary = _addDictionary;
-export const translate = _translate;
 
 // initializers
 // Initializing both the base classes (if necessary) and internal classes/components.

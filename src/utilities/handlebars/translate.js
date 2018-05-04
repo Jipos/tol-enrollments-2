@@ -1,4 +1,4 @@
 import Handlebars from 'handlebars/runtime';
-import {translate} from 'backbone.toledo';
+import {translate} from 'i18n';
 
 Handlebars.registerHelper('t', translate);

@@ -1,10 +1,15 @@
 import 'bootstrap/scss/bootstrap.scss';
+import 'bootstrap'
+
 import './main.scss';
 
-import './backbone.toledo.handlebars';
+import './utilities/handlebars';
 
-import $ from 'jquery';
-import Bb from 'backbone';
+import {customize as customizeI18n} from 'i18n';
+customizeI18n({
+  availableLanguages: ['en', 'nl'],
+  defaultLanguage: 'nl'
+});
 
 // for side effects (e.g. the registry).
 // import 'lib';
@@ -18,8 +23,9 @@ import './entities/enrollments';
 
 import './components/enroll'; // Register enroll component
 import './components/list_enrollments'; // Register listEnrollments component
-//import Pages from './pages'
 
+import $ from 'jquery';
+import Bb from 'backbone';
 $(function () {
   Bb.history.start();
 });

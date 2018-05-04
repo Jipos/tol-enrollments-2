@@ -17,3 +17,8 @@ window.channel = channel;
 
 import Radio from 'backbone.radio';
 Radio.DEBUG = true;
+
+import {customize as customizeI18n} from 'i18n';
+customizeI18n({
+  debug: true
+});
