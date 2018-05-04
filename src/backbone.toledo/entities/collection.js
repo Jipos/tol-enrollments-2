@@ -1,12 +1,12 @@
 import Bb from 'backbone';
-import defaults from 'lodash/defaults';
+import _ from 'underscore';
 
 export default Bb.Collection.extend({
 
   constructorName: 'Collection',
 
   fetch: function (options = {}) {
-    defaults(options, {
+    _.defaults(options, {
       wait: true
     });
 

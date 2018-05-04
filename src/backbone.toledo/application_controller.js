@@ -1,5 +1,5 @@
 import Mn from 'backbone.marionette';
-import defaults from 'lodash/defaults';
+import _ from 'underscore';
 
 import {channel} from './utilities/channel';
 
@@ -51,7 +51,7 @@ const ApplicationController = Mn.Object.extend({
   },
 
   show: function (view, options = {}) {
-    defaults(options, {
+    _.defaults(options, {
       loading: false,
       region: this.getOption('region')
     });

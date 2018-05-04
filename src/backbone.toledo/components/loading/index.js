@@ -1,11 +1,7 @@
 import Mn from 'backbone.marionette';
 import $ from 'jquery';
 import Radio from 'backbone.radio';
-import defaults from 'lodash/defaults';
-import isBoolean from 'lodash/isBoolean';
-import pick from 'lodash/pick';
-import toArray from 'lodash/toArray';
-import compact from 'lodash/compact';
+import _ from 'underscore';
 
 import ApplicationController from '../../application_controller';
 import channel from '../../utilities/channel';
@@ -19,9 +15,9 @@ const LoadingController = ApplicationController.extend({
     // TODO: KR ensure the following options: view, region and config
     var { view, config } = options;
 
-    config = isBoolean(config) ? {} : config;
+    config = _.isBoolean(config) ? {} : config;
 
-    defaults(config, {
+    _.defaults(config, {
       loadingType: "spinner",
       entities: this.getEntities(view),
       debug: false
@@ -66,7 +62,7 @@ const LoadingController = ApplicationController.extend({
    // return the entities manually set during configuration, or just pull
    // off the model and collection from the view (if they exist)
    // TODO: KR the option to set the entities manually seems to be missing
-   return compact(toArray(pick(view, 'model', 'collection')));
+   return _.compact(_.toArray(_.pick(view, 'model', 'collection')));
   },
   getLoadingView: function () {
    return new LoadingView();

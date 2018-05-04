@@ -3,7 +3,7 @@
 import Bb from 'backbone';
 import Mn from 'backbone.marionette';
 import Cocktail from 'backbone.cocktail';
-import omit from 'lodash/omit';
+import _ from 'underscore';
 
 const mixinKeywords = ['beforeIncluded', 'afterIncluded'];
 
@@ -20,7 +20,7 @@ function mixin(...mixins) {
 
     // mix the concern into our klasses prototype minus any
     // methods or properties in 'mixinKeywords'
-    Cocktail.mixin(klass, omit(mixin, mixinKeywords));
+    Cocktail.mixin(klass, _.omit(mixin, mixinKeywords));
 
     // call the afterIncluded method if it exists on our concern
     if (mixin.afterIncluded) {

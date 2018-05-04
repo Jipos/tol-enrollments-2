@@ -1,5 +1,5 @@
 import Radio from 'backbone.radio';
-import size from 'lodash/size';
+import _ from 'underscore';
 
 import channel from './channel'
 
@@ -32,7 +32,7 @@ const API = {
   },
 
   getRegistrySize: function () {
-    return size(this._registry);
+    return _.size(this._registry);
   }
 }
 

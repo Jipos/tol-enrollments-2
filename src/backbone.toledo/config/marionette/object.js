@@ -1,5 +1,5 @@
 import Mn from 'backbone.marionette';
-import result from 'lodash/result';
+import _ from 'underscore';
 
 const _destroyRadioOrig = Mn.Object.prototype._destroyRadio;
 
@@ -9,7 +9,7 @@ const _destroyRadioOrig = Mn.Object.prototype._destroyRadio;
 // when debug logging is enabled in backbone.radio.
 // This patch fixes that warning, by only cleaning up the handlers if any were defined.
 Mn.Object.prototype._destroyRadio = function _destroyRadio() {
-  if (result(this, 'radioRequests')) {
+  if (_.result(this, 'radioRequests')) {
     const args = Array.prototype.slice.call(arguments);
     _destroyRadioOrig.apply(this, args);
   }

@@ -1,6 +1,5 @@
 import Bb from 'backbone';
-import defaults from 'lodash/defaults';
-import bind from 'lodash/bind';
+import _ from 'underscore';
 
 var _sync = Bb.sync;
 
@@ -15,9 +14,9 @@ const methods = {
 
 Bb.sync = function (method, entity, options = {}) {
 
-  defaults(options, {
-    beforeSend: bind(methods.beforeSend, entity),
-    complete:   bind(methods.complete, entity)
+  _.defaults(options, {
+    beforeSend: _.bind(methods.beforeSend, entity),
+    complete:   _.bind(methods.complete, entity)
   });
   var sync = _sync(method, entity, options);
   if (!entity._fetch && method === 'read') {

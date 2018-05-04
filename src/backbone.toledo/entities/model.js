@@ -1,15 +1,12 @@
 import Bb from 'backbone';
-import defaults from 'lodash/defaults';
-import clone from 'lodash/clone';
-import omit from 'lodash/omit';
-import bind from 'lodash/bind';
+import _ from 'underscore';
 
 export default Bb.Model.extend({
 
   constructorName: 'Model',
 
   destroy: function (options = {}) {
-    defaults(options, {wait: true});
+    _.defaults(options, {wait: true});
 
     this.set({_destroy: true});
     Bb.Model.prototype.destroy.apply(this, [options]);
@@ -22,16 +19,16 @@ export default Bb.Model.extend({
   save: function (data, options = {}) {
     var isNew = this.isNew();
 
-    defaults(options, {
+    _.defaults(options, {
       wait: true,
-      success: bind(this.saveSuccess, this, isNew, options.collection, options.callback),
-      error: bind(this.saveError, this)
+      success: _.bind(this.saveSuccess, this, isNew, options.collection, options.callback),
+      error: _.bind(this.saveError, this)
     });
 
     this.unset('_errors');
 
-    data = data || clone(this.attributes);
-    data = omit(data, this.blacklist);
+    data = data || _.clone(this.attributes);
+    data = _.omit(data, this.blacklist);
 
     Bb.Model.prototype.save.apply(this, [data, options]);
   },
