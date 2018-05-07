@@ -4,7 +4,7 @@ It sets some debug options and exposes some globals.
 */
 
 import $ from 'jquery';
-window.jQuery = $;
+window.$ = $;
 
 import Bb from 'backbone';
 window.Bb = Bb;
