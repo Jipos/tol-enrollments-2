@@ -46,6 +46,7 @@ const ApplicationController = Mn.Object.extend({
   destroy: function () {
     const args = Array.prototype.slice.call(arguments);
     Mn.Object.prototype.destroy.apply(this, args);
+    this.resetMainView();
     this.getChannel().trigger('controller:destroyed', this, this.cid);
   },
 
@@ -67,6 +68,10 @@ const ApplicationController = Mn.Object.extend({
 
     this.setMainView(view);
     this._manageView(view, options);
+  },
+
+  resetMainView: function () {
+    delete this._mainView;
   },
 
   getMainView: function () {
