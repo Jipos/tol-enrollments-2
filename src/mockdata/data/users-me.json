@@ -1,0 +1,13 @@
+{
+  "id": "q0064518",
+  "givenName": "Kevin",
+  "familyName": "Rogiers",
+  "email": "kevin.rogiers@kuleuven.be",
+  "photo": null,
+  "student": false,
+  "staff": true,
+  "administrator": true,
+  "helpdesk": true,
+  "toledoTeam": true,
+  "affiliations": null
+}

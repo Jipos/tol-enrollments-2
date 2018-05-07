@@ -22,6 +22,7 @@ import './regions';
 
 // Register entities (for side effects)
 import './entities/enrollments';
+import './entities/users';
 
 import './components/enroll'; // Register enroll component
 import './components/list_enrollments'; // Register listEnrollments component

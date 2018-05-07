@@ -1,1 +1,2 @@
 import './enrollments';
+import './users';
