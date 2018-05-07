@@ -11,7 +11,10 @@ addTranslations({
 });
 
 const API = {
-  show: () => new Controller()
+  show: () => {
+    new Controller();
+    channel.trigger('component:shown', 'listEnrollments');
+  }
 }
 
 const ListEnrollmentsRouter = Mn.AppRouter.extend({

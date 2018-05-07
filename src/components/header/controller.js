@@ -1,6 +1,6 @@
 import Bb from 'backbone';
 
-import {ApplicationController} from 'backbone.toledo';
+import {ApplicationController, channel} from 'backbone.toledo';
 import {HeaderView} from './views';
 
 const HeaderController = ApplicationController.extend({
@@ -10,6 +10,9 @@ const HeaderController = ApplicationController.extend({
   initialize: function() {
     const headerView = this.getHeaderView();
     this.show(headerView);
+    channel.on('component:shown', function(componentName) {
+      console.log('[header] component is shown: ' + componentName);
+    })
   },
 
   getHeaderView: function() {
